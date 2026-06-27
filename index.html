@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Microsoft SDE Interview Roadmap · IDC Prep Guide</title>
+  <meta name="description" content="An experience-mapped roadmap to crack Software Development Engineer (SDE 1, SDE 2, Senior/Principal) interviews at Microsoft IDC — with curated resources for DSA, LLD, HLD, distributed systems and behavioral rounds." />
+  <meta name="author" content="utkarsh222739" />
+  <meta property="og:title" content="Microsoft SDE Interview Roadmap · IDC Prep Guide" />
+  <meta property="og:description" content="Experience-mapped prep roadmap for Microsoft SDE roles — DSA, LLD, HLD, distributed systems & behavioral, with the best resources." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0b1020;
+      --bg-soft: #11182e;
+      --card: #151c33;
+      --card-2: #1a2240;
+      --border: #26304f;
+      --text: #e8edf7;
+      --muted: #9aa6c2;
+      --accent: #4f8cff;
+      --accent-2: #7c5cff;
+      --green: #34d399;
+      --amber: #fbbf24;
+      --pink: #f472b6;
+      --radius: 18px;
+      --shadow: 0 20px 50px rgba(0,0,0,.45);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      color: var(--text);
+      background: radial-gradient(1200px 800px at 80% -10%, rgba(124,92,255,.18), transparent 60%),
+                  radial-gradient(1000px 700px at -10% 10%, rgba(79,140,255,.16), transparent 55%),
+                  var(--bg);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .wrap { max-width: 1060px; margin: 0 auto; padding: 0 22px; }
+
+    /* NAV */
+    header.nav {
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: blur(12px);
+      background: rgba(11,16,32,.72);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .brand { display: flex; align-items: center; gap: 12px; font-weight: 800; letter-spacing: .2px; }
+    .brand .logo {
+      width: 30px; height: 30px; border-radius: 8px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      display: grid; place-items: center; color: white; font-weight: 900;
+    }
+    .nav-links { display: flex; gap: 6px; flex-wrap: wrap; }
+    .nav-links a {
+      color: var(--muted); font-size: .9rem; font-weight: 600;
+      padding: 8px 12px; border-radius: 10px;
+    }
+    .nav-links a:hover { color: var(--text); background: var(--card); text-decoration: none; }
+
+    /* HERO */
+    .hero { padding: 70px 0 30px; text-align: center; }
+    .pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: .8rem; font-weight: 700; letter-spacing: .4px;
+      color: var(--accent); background: rgba(79,140,255,.12);
+      border: 1px solid rgba(79,140,255,.3);
+      padding: 7px 14px; border-radius: 999px; text-transform: uppercase;
+    }
+    .hero h1 {
+      font-size: clamp(2.1rem, 5vw, 3.6rem); line-height: 1.08;
+      margin: 22px 0 14px; font-weight: 900; letter-spacing: -.5px;
+    }
+    .hero h1 .grad {
+      background: linear-gradient(120deg, #6ea8ff, #b08cff 50%, #f472b6);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .hero p.lead { font-size: 1.12rem; color: var(--muted); max-width: 680px; margin: 0 auto 26px; }
+    .cta-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 22px; border-radius: 12px; font-weight: 700; font-size: .95rem;
+      border: 1px solid var(--border); color: var(--text); background: var(--card);
+      transition: transform .15s ease, box-shadow .15s ease;
+    }
+    .btn:hover { text-decoration: none; transform: translateY(-2px); }
+    .btn.primary {
+      border: none; color: white;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 10px 30px rgba(79,140,255,.35);
+    }
+
+    /* STATS */
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin: 44px 0 8px; }
+    .stat { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 18px; text-align: center; }
+    .stat b { display: block; font-size: 1.5rem; font-weight: 900; background: linear-gradient(120deg,#6ea8ff,#b08cff); -webkit-background-clip:text; background-clip:text; color:transparent; }
+    .stat span { font-size: .82rem; color: var(--muted); }
+
+    /* SECTION */
+    section { padding: 46px 0; scroll-margin-top: 80px; }
+    .section-head { margin-bottom: 26px; }
+    .level-tag {
+      display: inline-block; font-size: .78rem; font-weight: 800; letter-spacing: .5px;
+      padding: 5px 12px; border-radius: 999px; margin-bottom: 12px; text-transform: uppercase;
+    }
+    .tag-1 { color: var(--green); background: rgba(52,211,153,.12); border: 1px solid rgba(52,211,153,.3); }
+    .tag-2 { color: var(--amber); background: rgba(251,191,36,.12); border: 1px solid rgba(251,191,36,.3); }
+    .tag-3 { color: var(--pink); background: rgba(244,114,182,.12); border: 1px solid rgba(244,114,182,.3); }
+    .tag-0 { color: var(--accent); background: rgba(79,140,255,.12); border: 1px solid rgba(79,140,255,.3); }
+    h2.section-title { font-size: clamp(1.6rem, 3.5vw, 2.3rem); font-weight: 900; margin: 0 0 6px; letter-spacing: -.4px; }
+    .section-sub { color: var(--muted); max-width: 760px; }
+
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .card {
+      background: linear-gradient(180deg, var(--card), var(--card-2));
+      border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 22px; box-shadow: var(--shadow);
+    }
+    .card h3 { margin: 0 0 6px; font-size: 1.18rem; font-weight: 800; display:flex; align-items:center; gap:10px; }
+    .card .ic { width: 34px; height: 34px; border-radius: 9px; display: grid; place-items: center; font-size: 1.05rem; background: rgba(255,255,255,.05); border: 1px solid var(--border); }
+    .card p.desc { color: var(--muted); font-size: .95rem; margin: 4px 0 14px; }
+    .topics { display: flex; flex-wrap: wrap; gap: 7px; margin: 0 0 16px; }
+    .topics span { font-size: .78rem; font-weight: 600; color: var(--text); background: rgba(255,255,255,.04); border: 1px solid var(--border); padding: 4px 10px; border-radius: 8px; }
+    .res-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+    .res-list li a {
+      display: flex; align-items: center; gap: 10px; justify-content: space-between;
+      padding: 10px 12px; border-radius: 10px; background: rgba(255,255,255,.03);
+      border: 1px solid var(--border); color: var(--text); font-weight: 600; font-size: .9rem;
+    }
+    .res-list li a:hover { text-decoration: none; border-color: var(--accent); background: rgba(79,140,255,.08); }
+    .res-list .arrow { color: var(--muted); }
+
+    /* PROCESS TIMELINE */
+    .timeline { display: grid; gap: 14px; }
+    .tl-step { display: grid; grid-template-columns: 44px 1fr; gap: 16px; align-items: start; }
+    .tl-num { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; font-weight: 900; color: white; background: linear-gradient(135deg, var(--accent), var(--accent-2)); }
+    .tl-body { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 16px 18px; }
+    .tl-body h4 { margin: 0 0 4px; font-size: 1.05rem; }
+    .tl-body p { margin: 0; color: var(--muted); font-size: .92rem; }
+
+    /* CALLOUT */
+    .callout { background: linear-gradient(135deg, rgba(124,92,255,.14), rgba(79,140,255,.10)); border: 1px solid rgba(124,92,255,.3); border-radius: var(--radius); padding: 24px; }
+    .callout h3 { margin-top: 0; }
+    .full { grid-column: 1 / -1; }
+
+    /* FOOTER */
+    footer { border-top: 1px solid var(--border); padding: 34px 0 60px; text-align: center; color: var(--muted); }
+    footer a { font-weight: 600; }
+    .heart { color: var(--pink); }
+
+    @media (max-width: 760px) {
+      .grid { grid-template-columns: 1fr; }
+      .stats { grid-template-columns: 1fr 1fr; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <div class="brand"><span class="logo">M</span> SDE Roadmap · IDC</div>
+      <nav class="nav-links">
+        <a href="#process">Process</a>
+        <a href="#sde1">SDE 1</a>
+        <a href="#sde2">SDE 2</a>
+        <a href="#senior">Senior</a>
+        <a href="#behavioral">Behavioral</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- HERO -->
+    <section class="hero">
+      <span class="pill">★ Microsoft IDC Preparation</span>
+      <h1>The <span class="grad">Microsoft SDE</span><br/>Interview Roadmap</h1>
+      <p class="lead">An experience-mapped game plan for cracking Software Development Engineer interviews at Microsoft's India Development Center — from DSA fundamentals to distributed systems, mapped to your seniority with the best resources at each level.</p>
+      <div class="cta-row">
+        <a class="btn primary" href="#sde1">Start with SDE 1 →</a>
+        <a class="btn" href="#behavioral">Behavioral &amp; Culture</a>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><b>3</b><span>Experience tiers</span></div>
+        <div class="stat"><b>25+</b><span>Curated resources</span></div>
+        <div class="stat"><b>5</b><span>Interview stages</span></div>
+        <div class="stat"><b>1</b><span>Growth Mindset</span></div>
+      </div>
+    </section>
+
+    <!-- PROCESS -->
+    <section id="process">
+      <div class="section-head">
+        <span class="level-tag tag-0">The Loop</span>
+        <h2 class="section-title">How the Microsoft interview works</h2>
+        <p class="section-sub">Before diving into topics, know the shape of the funnel. Most IDC loops follow this sequence; the depth of each stage scales with seniority.</p>
+      </div>
+      <div class="timeline">
+        <div class="tl-step"><div class="tl-num">1</div><div class="tl-body"><h4>Online Assessment (OA)</h4><p>2–3 timed DSA problems on Codility / HackerRank. Common for SDE 1 &amp; campus hires. Optimize for correctness + edge cases under time pressure.</p></div></div>
+        <div class="tl-step"><div class="tl-num">2</div><div class="tl-body"><h4>Technical Phone / Recruiter Screen</h4><p>One coding problem on a shared editor plus a resume walkthrough. Talk through your approach out loud — communication is scored.</p></div></div>
+        <div class="tl-step"><div class="tl-num">3</div><div class="tl-body"><h4>Onsite Loop (4–5 rounds)</h4><p>Coding + design rounds. Each interviewer probes a different competency: problem-solving, code quality, design, and collaboration.</p></div></div>
+        <div class="tl-step"><div class="tl-num">4</div><div class="tl-body"><h4>“As-Appropriate” (AA) Round</h4><p>A senior leader / hiring manager makes the final call. Heavier on behavioral signal, ambiguity handling, and culture fit.</p></div></div>
+        <div class="tl-step"><div class="tl-num">5</div><div class="tl-body"><h4>Debrief &amp; Decision</h4><p>Interviewers sync, level you, and align on the offer. Consistent signal across rounds matters more than one standout answer.</p></div></div>
+      </div>
+    </section>
+
+    <!-- SDE 1 -->
+    <section id="sde1">
+      <div class="section-head">
+        <span class="level-tag tag-1">SDE 1 · 0–2 Years</span>
+        <h2 class="section-title">Master the fundamentals</h2>
+        <p class="section-sub">At the entry level the loop is overwhelmingly Data Structures &amp; Algorithms plus foundational CS. Microsoft favors clean variations of standard problems over obscure puzzles.</p>
+      </div>
+      <div class="grid">
+        <div class="card">
+          <h3><span class="ic">🧩</span> Data Structures &amp; Algorithms</h3>
+          <p class="desc">Build pattern recognition. Drill the recurring shapes interviewers reuse across problems.</p>
+          <div class="topics">
+            <span>Arrays &amp; Strings</span><span>Hashing</span><span>Two Pointers</span><span>Sliding Window</span><span>Linked Lists</span><span>Stacks &amp; Queues</span><span>Trees &amp; BST</span><span>Heaps</span><span>Graphs (BFS/DFS)</span><span>Recursion &amp; Backtracking</span><span>Binary Search</span><span>Dynamic Programming</span><span>Big-O Analysis</span>
+          </div>
+          <ul class="res-list">
+            <li><a href="https://leetcode.com/company/microsoft/" target="_blank" rel="noopener">LeetCode · Top Microsoft Questions <span class="arrow">↗</span></a></li>
+            <li><a href="https://takeuforward.org/strivers-a2z-dsa-course/sheets/strivers-a2z-dsa-course-sheet-2/" target="_blank" rel="noopener">Striver’s A2Z DSA Course <span class="arrow">↗</span></a></li>
+            <li><a href="https://neetcode.io/practice" target="_blank" rel="noopener">NeetCode 150 &amp; Blind 75 <span class="arrow">↗</span></a></li>
+            <li><a href="https://github.com/jwasham/coding-interview-university" target="_blank" rel="noopener">Coding Interview University <span class="arrow">↗</span></a></li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3><span class="ic">⚙️</span> CS Fundamentals</h3>
+          <p class="desc">Expect rapid-fire theory questions woven into coding rounds — be conversational, not just textbook.</p>
+          <div class="topics">
+            <span>OS: threads &amp; processes</span><span>Deadlocks</span><span>Scheduling</span><span>DBMS: SQL</span><span>Indexing</span><span>ACID</span><span>Normalization</span><span>Networking: TCP/IP</span><span>DNS</span><span>HTTP</span><span>OOP basics</span>
+          </div>
+          <ul class="res-list">
+            <li><a href="https://www.youtube.com/c/GateSmashers" target="_blank" rel="noopener">Gate Smashers · OS &amp; DBMS <span class="arrow">↗</span></a></li>
+            <li><a href="https://github.com/Devinterview-io/operating-systems-interview-questions" target="_blank" rel="noopener">OS Interview Questions <span class="arrow">↗</span></a></li>
+            <li><a href="https://sqlbolt.com/" target="_blank" rel="noopener">SQLBolt · Interactive SQL <span class="arrow">↗</span></a></li>
+          </ul>
+        </div>
+        <div class="card full">
+          <h3><span class="ic">✅</span> SDE 1 study rhythm</h3>
+          <p class="desc">A sustainable cadence beats cramming. Aim for breadth first, then depth on weak patterns.</p>
+          <div class="topics">
+            <span>Solve 2–3 mediums daily</span><span>1 mock/week</span><span>Revisit wrong problems after 7 days</span><span>Maintain a “patterns” cheat-sheet</span><span>Explain solutions out loud</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SDE 2 -->
+    <section id="sde2">
+      <div class="section-head">
+        <span class="level-tag tag-2">SDE 2 · 2–5 Years</span>
+        <h2 class="section-title">Design production-ready systems</h2>
+        <p class="section-sub">You’re expected to write maintainable, testable code and design robust, scalable services. The bar on code quality and trade-off reasoning rises sharply.</p>
+      </div>
+      <div class="grid">
+        <div class="card">
+          <h3><span class="ic">🧱</span> Low-Level Design (LLD)</h3>
+          <p class="desc">Translate requirements into clean class hierarchies. Whether in Java interfaces or Python classes, show modularity and dependency management.</p>
+          <div class="topics">
+            <span>OOD</span><span>SOLID</span><span>Design Patterns</span><span>UML</span><span>Composition over inheritance</span><span>Concurrency</span><span>API design</span><span>Unit testing</span>
+          </div>
+          <ul class="res-list">
+            <li><a href="https://www.educative.io/courses/grokking-the-object-oriented-design-interview" target="_blank" rel="noopener">Grokking the OOD Interview <span class="arrow">↗</span></a></li>
+            <li><a href="https://refactoring.guru/design-patterns" target="_blank" rel="noopener">Refactoring.Guru · Design Patterns <span class="arrow">↗</span></a></li>
+            <li><a href="https://www.oreilly.com/library/view/head-first-design/0596007124/" target="_blank" rel="noopener">Head First Design Patterns <span class="arrow">↗</span></a></li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3><span class="ic">🌐</span> High-Level Design (HLD)</h3>
+          <p class="desc">Reason about distributed components and their trade-offs. Drive the design and justify each choice.</p>
+          <div class="topics">
+            <span>Load balancers</span><span>Caching</span><span>DB sharding</span><span>Replication</span><span>Message queues</span><span>CDN</span><span>Rate limiting</span><span>CAP theorem</span>
+          </div>
+          <ul class="res-list">
+            <li><a href="https://github.com/donnemartin/system-design-primer" target="_blank" rel="noopener">The System Design Primer <span class="arrow">↗</span></a></li>
+            <li><a href="https://bytebytego.com/" target="_blank" rel="noopener">ByteByteGo by Alex Xu <span class="arrow">↗</span></a></li>
+            <li><a href="https://www.educative.io/courses/grokking-the-system-design-interview" target="_blank" rel="noopener">Grokking the System Design Interview <span class="arrow">↗</span></a></li>
+          </ul>
+        </div>
+        <div class="card full callout">
+          <h3><span class="ic">🚀</span> Domain expertise &amp; ownership</h3>
+          <p class="desc">Interviewers go deep on your past projects. Being able to articulate the architecture of complex systems you’ve built — e.g. orchestrating autonomous AI agents using the Model Context Protocol (MCP) — is a strong signal of technical depth and ownership. Prepare a crisp architecture narrative: the problem, constraints, your design choices, the trade-offs you rejected, and the measurable impact.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SENIOR -->
+    <section id="senior">
+      <div class="section-head">
+        <span class="level-tag tag-3">Senior / Principal · 5+ Years</span>
+        <h2 class="section-title">Drive architectural vision</h2>
+        <p class="section-sub">Senior loops evaluate your ability to handle ambiguity, reason about deep trade-offs, and lead cross-functional initiatives — not just produce a correct design.</p>
+      </div>
+      <div class="grid">
+        <div class="card">
+          <h3><span class="ic">🛰️</span> Advanced Distributed Systems</h3>
+          <p class="desc">Move from knowing components to mastering their trade-offs at scale.</p>
+          <div class="topics">
+            <span>Consistency models</span><span>Fault tolerance</span><span>Replication lag</span><span>Consensus (Raft/Paxos)</span><span>Bottleneck mitigation</span><span>Observability</span><span>Idempotency</span>
+          </div>
+          <ul class="res-list">
+            <li><a href="https://dataintensive.net/" target="_blank" rel="noopener">Designing Data-Intensive Applications <span class="arrow">↗</span></a></li>
+            <li><a href="https://www.infoq.com/architecture-design/" target="_blank" rel="noopener">InfoQ · Architecture Presentations <span class="arrow">↗</span></a></li>
+            <li><a href="https://github.com/binhnguyennus/awesome-scalability" target="_blank" rel="noopener">Awesome Scalability (real case studies) <span class="arrow">↗</span></a></li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3><span class="ic">🎯</span> System Design Execution</h3>
+          <p class="desc">Own the room: scope, estimate, design end-to-end, and pre-empt failure modes without prompting.</p>
+          <div class="topics">
+            <span>Requirement scoping</span><span>Back-of-envelope estimation</span><span>Trade-off articulation</span><span>Capacity planning</span><span>Failure modes</span><span>Evolvability</span>
+          </div>
+          <ul class="res-list">
+            <li><a href="https://interviewing.io/" target="_blank" rel="noopener">Interviewing.io · Mock interviews <span class="arrow">↗</span></a></li>
+            <li><a href="https://www.tryexponent.com/" target="_blank" rel="noopener">Exponent · System Design Practice <span class="arrow">↗</span></a></li>
+          </ul>
+        </div>
+        <div class="card full">
+          <h3><span class="ic">🧭</span> Leadership &amp; influence</h3>
+          <p class="desc">At Senior+ the technical bar is table stakes; the differentiator is impact through others.</p>
+          <div class="topics">
+            <span>Mentoring &amp; uplifting teams</span><span>Driving alignment across orgs</span><span>Tech strategy &amp; roadmaps</span><span>Navigating ambiguity</span><span>Making reversible vs irreversible calls</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BEHAVIORAL -->
+    <section id="behavioral">
+      <div class="section-head">
+        <span class="level-tag tag-0">All Levels</span>
+        <h2 class="section-title">Microsoft culture &amp; behavioral</h2>
+        <p class="section-sub">Microsoft weights behavioral rounds heavily to assess alignment with its core values — above all, a <strong>Growth Mindset</strong>: learning from failure, collaborating across teams, and adapting under pressure.</p>
+      </div>
+      <div class="grid">
+        <div class="card">
+          <h3><span class="ic">⭐</span> The STAR Method</h3>
+          <p class="desc">Prepare 6–8 structured stories you can flex across questions. Lead with the result, quantify the impact.</p>
+          <div class="topics">
+            <span>Situation</span><span>Task</span><span>Action</span><span>Result</span><span>Owned a critical bug</span><span>Navigated team conflict</span><span>Learned tech under pressure</span><span>Influenced without authority</span>
+          </div>
+          <ul class="res-list">
+            <li><a href="https://careers.microsoft.com/v2/global/en/hiring-tips/interview-tips.html" target="_blank" rel="noopener">Microsoft · Interview Tips &amp; Prep <span class="arrow">↗</span></a></li>
+            <li><a href="https://www.microsoft.com/en-us/about/corporate-values" target="_blank" rel="noopener">Microsoft · Corporate Values &amp; Culture <span class="arrow">↗</span></a></li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3><span class="ic">🌱</span> Signal Microsoft looks for</h3>
+          <p class="desc">Frame answers to surface these attributes explicitly — interviewers map your stories to them.</p>
+          <div class="topics">
+            <span>Growth mindset</span><span>Customer obsession</span><span>Collaboration / “one Microsoft”</span><span>Inclusion &amp; allyship</span><span>Bias for learning</span><span>Accountability</span>
+          </div>
+          <ul class="res-list">
+            <li><a href="https://www.linkedin.com/learning/" target="_blank" rel="noopener">Mock behavioral practice (LinkedIn Learning) <span class="arrow">↗</span></a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section>
+      <div class="callout" style="text-align:center;">
+        <h2 class="section-title" style="margin-bottom:8px;">Pick your tier, pick a resource, start today.</h2>
+        <p class="section-sub" style="margin:0 auto 18px;">Consistency compounds. Show up daily, reflect on misses, and let the Growth Mindset do the rest.</p>
+        <div class="cta-row">
+          <a class="btn primary" href="#process">Review the loop ↑</a>
+          <a class="btn" href="https://leetcode.com/company/microsoft/" target="_blank" rel="noopener">Open LeetCode →</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <p>Built with <span class="heart">♥</span> as an open prep guide · <a href="https://github.com/utkarsh222739/microsoft-sde-prep-roadmap" target="_blank" rel="noopener">View on GitHub</a></p>
+      <p style="font-size:.82rem;">This is an independent study resource and is not affiliated with or endorsed by Microsoft Corporation.</p>
+    </div>
+  </footer>
+</body>
+</html>
